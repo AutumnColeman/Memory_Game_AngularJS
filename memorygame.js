@@ -7,7 +7,9 @@ function Card(url) {
 }
 
 app.controller('MyController', function($scope, $timeout) {
-
+  $scope.state = "first";
+  $scope.firstCard;
+  $scope.secondCard;
   $scope.cards = [
     [
       new Card('images/monsters-01.png'),
@@ -23,6 +25,29 @@ app.controller('MyController', function($scope, $timeout) {
     ]
 
   ];
-  console.log($scope.cards);
-  console.log($scope.cards[0][0]);
+
+
+  $scope.click = function(card) {
+    if ($scope.state === "first") {
+        card.open = true;
+        $scope.firstCard = card;
+        $scope.state = "second";
+        console.log($scope.firstCard.url);
+      }
+    else if ($scope.state === "second") {
+        card.open = true;
+        $scope.secondCard = card;
+        console.log($scope.secondCard.url);
+        if ($scope.firstCard.url === $scope.secondCard.url) {
+          console.log("check");
+          }
+        }
+
+};
+  // $scope.click = function(card) {
+  //       card.open = true;
+  //     };
+
+
+
 });
