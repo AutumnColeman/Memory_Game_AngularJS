@@ -40,7 +40,19 @@ app.controller('MyController', function($scope, $timeout) {
         console.log($scope.secondCard.url);
         if ($scope.firstCard.url === $scope.secondCard.url) {
           console.log("check");
+          $scope.state = "first";
+          console.log($scope.state);
           }
+        if ($scope.firstCard.url !== $scope.secondCard.url) {
+          console.log("not matched");
+          $timeout(function() {
+            $scope.firstCard.open = false;
+            $scope.secondCard.open = false;
+          }, 1000);
+
+          $scope.state = "first";
+          console.log($scope.state);
+        }
         }
 
 };
