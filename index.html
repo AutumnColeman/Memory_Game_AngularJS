@@ -18,7 +18,7 @@
         <tr ng-repeat="row in cards" ng-class="{open: cards.open}">
           <td ng-repeat="card in row">
             <!-- <input type="checkbox" ng-model="myVar"> -->
-            <img src="images/logo.png" ng-hide="card.open" ng-click="click(card)" />
+            <img src="images/logo.png" ng-hide="card.open" ng-click="click(card,$parent.index, $index)" />
             <img ng-model="cards.open" ng-show="card.open" ng-src="{{card.url}}" />
           </td>
         </tr>

@@ -1,7 +1,7 @@
 var app = angular.module('my-app', []);
 
-function Card(url) {
-  this.url = url;
+function Card(num) {
+  this.url = 'images/monsters-' + num + '.png';
   this.open = false;
   this.matched = false;
 }
@@ -10,22 +10,24 @@ app.controller('MyController', function($scope, $timeout) {
   $scope.state = "first";
   $scope.firstCard;
   $scope.secondCard;
+  $scope.count = 0;
+  $scope.countDown = 15;
   $scope.cards = [
     [
-      new Card('images/monsters-01.png'),
-      new Card('images/monsters-02.png'),
-      new Card('images/monsters-03.png'),
-      new Card('images/monsters-04.png')
+      new Card('01'),
+      new Card('02'),
+      new Card('03'),
+      new Card('04')
     ],
     [
-      new Card('images/monsters-01.png'),
-      new Card('images/monsters-02.png'),
-      new Card('images/monsters-03.png'),
-      new Card('images/monsters-04.png')
+      new Card('01'),
+      new Card('02'),
+      new Card('03'),
+      new Card('04')
     ]
 
   ];
-
+console.log($scope.cards);
 
   $scope.click = function(card) {
     if ($scope.state === "first") {
@@ -41,10 +43,25 @@ app.controller('MyController', function($scope, $timeout) {
         if ($scope.firstCard.url === $scope.secondCard.url) {
           console.log("check");
           $scope.state = "first";
-          console.log($scope.state);
+          $scope.matched = true;
+          $scope.firstCard.matched = true;
+          $scope.count += 1;
+            if ($scope.count === 4) {
+              console.log("Win!");
+            }
+          console.log($scope.count);
+          // console.log($scope.matched);
+          // console.log($scope.firstCard.matched);
+          // console.log($scope.secondCard.matched);
+          // console.log($scope.state);
           }
         if ($scope.firstCard.url !== $scope.secondCard.url) {
           console.log("not matched");
+          $scope.countDown -= 1;
+          console.log($scope.countDown);
+            if ($scope.countDown === 0) {
+              console.log("You lose");
+            }
           $timeout(function() {
             $scope.firstCard.open = false;
             $scope.secondCard.open = false;
@@ -53,7 +70,12 @@ app.controller('MyController', function($scope, $timeout) {
           $scope.state = "first";
           console.log($scope.state);
         }
-        }
+      }
+
+  // function winner(element, index, array) {
+  //   return element >= 10;
+  // }
+
 
 };
   // $scope.click = function(card) {
